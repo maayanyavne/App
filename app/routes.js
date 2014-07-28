@@ -98,6 +98,7 @@ module.exports = function(app, passport) {
 		//the callback after clever has authenticated the user
 		app.get('/auth/clever/callback', function(req, res){
 			console.log('Callback worked!');
+			res.render('callback.ejs');
 		});
 
 
