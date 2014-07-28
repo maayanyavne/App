@@ -93,6 +93,12 @@ module.exports = function(app, passport) {
 				successRedirect : '/profile',
 				failureRedirect : '/'
 			}));
+		
+	// Clever Cqllback------
+		//the callback after clever has authenticated the user
+		app.get('auth/clever/callback', function(req, res){
+			console.log('Callback worked!');
+		});
 
 
 // =============================================================================
