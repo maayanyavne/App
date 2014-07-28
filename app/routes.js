@@ -96,7 +96,7 @@ module.exports = function(app, passport) {
 		
 	// Clever Cqllback------
 		//the callback after clever has authenticated the user
-		app.get('auth/clever/callback', function(req, res){
+		app.get('/auth/clever/callback', function(req, res){
 			console.log('Callback worked!');
 		});
 
