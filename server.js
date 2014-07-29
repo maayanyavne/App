@@ -16,6 +16,9 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+var hoxy = require('hoxy');
+
+
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -44,3 +47,13 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
+
+var proxy = new hoxy.Proxy().listen(8080);
+
+proxy.intercept({
+  phase: 'request',
+  method: 'POST',
+   as: 'string'
+}, function(req, resp){
+  console.log('----------REQUEST--------: '+ req.string);
+});
