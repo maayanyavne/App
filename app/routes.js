@@ -1,4 +1,5 @@
 var configAuth = require('./auth.js');
+var oAuth 	   = require('./oAuth.js');
 
 module.exports = function(app, passport) {
 
@@ -7,7 +8,6 @@ module.exports = function(app, passport) {
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
 		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + '?response_type=code&redirect_uri=' + configAuth.cleverAuthDev.callbackURL + '&client_id=87df15e166dd46d2d22d&scope=' + configAuth.cleverAuthDev.scope + '&district_id=52c5e88553a943970d001718' + "\" ";
-			console.log(link);
 			res.render('index.ejs', {
 			oAuthLink : link
 		});
@@ -97,8 +97,8 @@ module.exports = function(app, passport) {
 	// Clever Cqllback------
 		//the callback after clever has authenticated the user
 		app.get('/auth/clever/callback', function(req, res){
-			console.log('Callback worked!');
-			res.render('callback.ejs');
+			oAuth.startOAuth(req,res);
+			res.render('schedule.ejs');
 		});
 
 

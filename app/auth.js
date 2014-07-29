@@ -26,7 +26,8 @@ module.exports = {
 		'callbackURL' 	: encodeURIComponent('https://bell-schedule-app-maayanyavne.herokuapp.com/auth/clever/callback'),
 		'district_id'	: '52c5e88553a943970d001718',
 		'scope'			: encodeURIComponent('read:user'),
-		'response_type'	: 'code'
+		'response_type'	: 'code',
+		'token'			: 'ed35413288c27d424ba726499d197630d80eb753'
 	},
 	'cleverAuthProd' : {
 		'clientID' 		: '94436bc012d738629cec',
@@ -34,11 +35,13 @@ module.exports = {
 		'callbackURL' 	: encodeURIComponent('https://bell-schedule-app-maayanyavne.herokuapp.com/auth/clever/callback'),
 		'district_id'	: '52c5e88553a943970d001718',
 		'scope'			: encodeURIComponent('read:user'),
-		'response_type'	: 'code'
+		'response_type'	: 'code',
+		'token'			: 'ed35413288c27d424ba726499d197630d80eb753'
 	},
 	'cleverAPI'		: {
 		'cleverOAuthInit'	: 'https://clever.com/oauth/authorize',
-		'cleverOAuthToken'	: 'https://clever.com/oauth/token'
+		'cleverOAuthToken'	: 'https://clever.com/oauth/token',
+		'grant_type'		: 'authorization_code'
 		
 	}
 };
