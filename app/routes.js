@@ -1,5 +1,7 @@
 var configAuth = require('./auth.js');
 var oAuth 	   = require('./oAuth.js');
+var queryString = require('querystring');
+
 
 module.exports = function(app, passport) {
 
@@ -7,7 +9,8 @@ module.exports = function(app, passport) {
 
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
-		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + '?response_type=code&redirect_uri=' + configAuth.cleverAuthDev.callbackURL + '&client_id=94436bc012d738629cec&scope=' + configAuth.cleverAuthDev.scope + '&district_id=52c5e88553a943970d001718' + "\" ";
+		authParams = queryString.stringify(configAuth.cleverAuthReq);
+		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
 			res.render('index.ejs', {
 			oAuthLink : link
 		});
