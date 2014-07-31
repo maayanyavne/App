@@ -1,0 +1,22 @@
+/**
+ * @author Maayan Yavne
+ */
+
+var mongoose = require('mongoose');
+
+// define the schema for our session model
+var cleverUserSchema = mongoose.Schema({
+	id			: String,
+	type		: String,
+	sessionData : {
+		authorization_code : String,
+		access_token	   : String			
+	},
+	classes	: [{
+		name	: String,
+		period	: String		
+	}]				
+});
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('cleverUser', cleverUserSchema);

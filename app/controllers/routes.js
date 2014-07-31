@@ -1,7 +1,20 @@
-var configAuth = require('./auth.js');
+var configAuth = require('../../config/auth.js');
 var oAuth 	   = require('./oAuth.js');
+var schedule   = require('./schedule.js');
 var queryString = require('querystring');
 
+var onSessionSucess = function(req, res, body)
+{
+	schedule.showSchedule(req, res, body)
+	//Authentication was done sucessfully - show main view
+	res.render('schedule.ejs');
+}
+
+var onSessionFailure = function(req,res, body)
+{
+	//Authentication was done sucessfully - show main view
+	res.render('fail.ejs');
+}
 
 module.exports = function(app, passport) {
 
@@ -100,8 +113,7 @@ module.exports = function(app, passport) {
 	// Clever Cqllback------
 		//the callback after clever has authenticated the user
 		app.get('/auth/clever/callback', function(req, res){
-			oAuth.startOAuth(req,res);
-			res.render('schedule.ejs');
+			oAuth.startOAuth(req,res, onSessionSucess, onSessionFailure);
 		});
 
 

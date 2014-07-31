@@ -48,7 +48,17 @@ module.exports = {
 	'cleverAPI'		: {
 		'cleverOAuthInit'	: 'https://clever.com/oauth/authorize',
 		'cleverOAuthToken'	: 'https://clever.com/oauth/token',
-		'cleverMe'			: 'https://api.clever.com/me',
+		'cleverAPIPath'		: 'https://api.clever.com',
+		'cleverMe'			: '/me',
 		'grant_type'		: 'authorization_code'
-	}
+	},
+	'cleverTeacherAPI': {
+		'teacherAPIPath': '/v1.1/teachers/',
+		'teacherSections': '/sections'
+	},
+	'cleverStudentAPI': {
+		'studentAPIPath': '/v1.1/students/',
+		'studentSections': '/sections'
+	},
+
 };
