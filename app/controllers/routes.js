@@ -5,9 +5,8 @@ var queryString = require('querystring');
 
 var onSessionSucess = function(req, res, body)
 {
-	schedule.showSchedule(req, res, body)
 	//Authentication was done sucessfully - show main view
-	res.render('schedule.ejs');
+	schedule.showSchedule(req, res, body, onSessionFailure);
 }
 
 var onSessionFailure = function(req,res, body)
@@ -22,11 +21,12 @@ module.exports = function(app, passport) {
 
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
-		authParams = queryString.stringify(configAuth.cleverAuthReq);
-		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
-			res.render('index.ejs', {
-			oAuthLink : link
-		});
+		// authParams = queryString.stringify(configAuth.cleverAuthReq);
+		// var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
+			// res.render('index.ejs', {
+			// oAuthLink : link
+		// });
+		res.render('test.html');
 	});
 
 	// PROFILE SECTION =========================

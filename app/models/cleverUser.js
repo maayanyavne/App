@@ -7,12 +7,13 @@ var mongoose = require('mongoose');
 // define the schema for our session model
 var cleverUserSchema = mongoose.Schema({
 	id			: String,
+	district	: String,
 	type		: String,
 	sessionData : {
 		authorization_code : String,
 		access_token	   : String			
 	},
-	classes	: [{
+	courses	: [{
 		name	: String,
 		period	: String		
 	}]				

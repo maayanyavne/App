@@ -3,6 +3,7 @@
 const CALLBACK_URL 	= 'http://128.12.160.33/auth/clever/callback'
 const CLIENT_ID	   	= '94436bc012d738629cec'
 const CLIENT_SECRET	= 'fd33dcb16f3af4c7a30e925bb81d82a3be976db9'
+const DISTRICT_OAUTH = 'ed35413288c27d424ba726499d197630d80eb753'
 
 // expose our config directly to our application using module.exports
 module.exports = {
@@ -35,7 +36,8 @@ module.exports = {
 	
 	'cleverAPIHeaders'	: {
 		'content-type'  : 'application/x-www-form-urlencoded',
-        'Authorization'	:  'Basic ' + new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
+        'Authorization'	:  'Basic ' + new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
+        'districtOAuth'	: DISTRICT_OAUTH
 	},
 	
 	'cleverAuthDev' : {
