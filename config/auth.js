@@ -1,6 +1,6 @@
 // config/auth.js
 
-const CALLBACK_URL 	= 'http://128.12.160.33/auth/clever/callback'
+const CALLBACK_URL 	= 'https://bell-schedule-app-maayanyavne.herokuapp.com/auth/clever/callback'
 const CLIENT_ID	   	= '94436bc012d738629cec'
 const CLIENT_SECRET	= 'fd33dcb16f3af4c7a30e925bb81d82a3be976db9'
 const DISTRICT_OAUTH = 'ed35413288c27d424ba726499d197630d80eb753'
@@ -42,7 +42,7 @@ module.exports = {
 	'cleverAuthDev' : {
 		'clientID' 		: CLIENT_ID,
 		'clientSecret' 	: CLIENT_SECRET,
-		'callbackURL' 	: CALLBACK_URL, //encodeURIComponent('https://bell-schedule-app-maayanyavne.herokuapp.com/auth/clever/callback'),
+		'callbackURL' 	: CALLBACK_URL,
 		'district_id'	: '52c5e88553a943970d001718',
 		'districtOAuth'	: DISTRICT_OAUTH
 
