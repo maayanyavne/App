@@ -9,10 +9,6 @@ var cleverUserSchema = mongoose.Schema({
 	id			: String,
 	district	: String,
 	type		: String,
-	sessionData : {
-		authorization_code : String,
-		access_token	   : String			
-	},
 	courses	: [{
 		name	: String,
 		period	: String		

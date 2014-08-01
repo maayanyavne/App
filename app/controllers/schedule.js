@@ -4,7 +4,6 @@
 var request = require ('request');
 var queryString = require('querystring');
 var configAuth = require('../../config/auth.js');
-var clever = require('clever');
 
 // load up the user model
 var CleverUser       = require('../models/cleverUser.js');
@@ -65,8 +64,6 @@ function configureUserRequest(options, access_token) {
     headers = configAuth.cleverAPIHeaders;
     headers.Authorization = 'Bearer ' + access_token;
     options.headers = headers;
-    console.log(options.url);
-    console.log(options.headers);
 
     return options;
 }
@@ -92,8 +89,6 @@ function configureSectionRequest(options, cleverUser){
       headers = configAuth.cleverAPIHeaders;
       headers.Authorization = 'Bearer ' + configAuth.cleverAuthDev.districtOAuth;
       options.headers = headers;
-      console.log("url: " + url);
-      console.log("headers: " + headers);
       return options;
 }
 
@@ -112,7 +107,6 @@ function sortCourses(cleverUser){
 // Updates the model with course data (course_name, id)
 function updateCleverUser(body, cleverUser, data){
 	var bodyData = JSON.parse(body).data;
-	console.log(bodyData);
 	switch (data){
 		case "userData": {
        		cleverUser.id =  bodyData.id;
