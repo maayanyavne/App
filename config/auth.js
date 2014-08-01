@@ -36,15 +36,16 @@ module.exports = {
 	
 	'cleverAPIHeaders'	: {
 		'content-type'  : 'application/x-www-form-urlencoded',
-        'Authorization'	:  'Basic ' + new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
-        'districtOAuth'	: DISTRICT_OAUTH
-	},
+        'Authorization'	:  'Basic ' + new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
+   	},
 	
 	'cleverAuthDev' : {
 		'clientID' 		: CLIENT_ID,
 		'clientSecret' 	: CLIENT_SECRET,
 		'callbackURL' 	: CALLBACK_URL, //encodeURIComponent('https://bell-schedule-app-maayanyavne.herokuapp.com/auth/clever/callback'),
 		'district_id'	: '52c5e88553a943970d001718',
+		'districtOAuth'	: DISTRICT_OAUTH
+
 	},
 	
 	'cleverAPI'		: {

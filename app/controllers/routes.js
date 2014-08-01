@@ -3,10 +3,13 @@ var oAuth 	   = require('./oAuth.js');
 var schedule   = require('./schedule.js');
 var queryString = require('querystring');
 
+var CleverUser       = require('../models/cleverUser.js');
+
 var onSessionSucess = function(req, res, body)
 {
 	//Authentication was done sucessfully - show main view
-	schedule.showSchedule(req, res, body, onSessionFailure);
+	schedule.showSchedule(req, res, body, onSessionFailure, onScheduleSuccess);
+	
 }
 
 var onSessionFailure = function(req,res, body)
@@ -15,24 +18,39 @@ var onSessionFailure = function(req,res, body)
 	res.render('fail.ejs');
 }
 
+var onScheduleSuccess = function(req,res)
+{
+	//Authentication was done sucessfully - show schedule view
+	console.log('Schedule View');
+	res.render('schedule.ejs');
+}
+
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
 	// show the home page (will also have our login links)
 	app.get('/', function(req, res) {
-		// authParams = queryString.stringify(configAuth.cleverAuthReq);
-		// var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
-			// res.render('index.ejs', {
-			// oAuthLink : link
-		// });
-		res.render('test.html');
+		authParams = queryString.stringify(configAuth.cleverAuthReq);
+		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
+			res.render('index.ejs', {
+			oAuthLink : link
+		});
+		
 	});
 
 	// PROFILE SECTION =========================
-	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
-			user : req.user
+	app.get('/logout', function(req, res) {
+		//Get id of current user and remove from db
+		var id = req.param('id');
+		CleverUser.findOne({ "id": id}, function(err, cleverUser){
+			cleverUser.remove();
+		});
+		
+		authParams = queryString.stringify(configAuth.cleverAuthReq);
+		var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";
+			res.render('index.ejs', {
+			oAuthLink : link
 		});
 	});
 

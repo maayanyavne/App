@@ -37,6 +37,7 @@ exports.startOAuth = function(req, res, onSessionSucess, onSessionFailure) {
 						// Parse body and extract acess Code
   						var info = JSON.parse(body);
   						var access_token = info.access_token; 
+  						console.log("Access Token" + access_token);
   						newCleverUser.sessionData.access_token = access_token;
   						newCleverUser.save(function(error)
   						{
