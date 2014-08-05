@@ -8,24 +8,6 @@ const DISTRICT_OAUTH = 'ed35413288c27d424ba726499d197630d80eb753'
 // expose our config directly to our application using module.exports
 module.exports = {
 
-	'facebookAuth' : {
-		'clientID' 		: 'your-secret-clientID-here', // your App ID
-		'clientSecret' 	: 'your-client-secret-here', // your App Secret
-		'callbackURL' 	: 'http://localhost:8080/auth/facebook/callback'
-	},
-
-	'twitterAuth' : {
-		'consumerKey' 		: 'your-consumer-key-here',
-		'consumerSecret' 	: 'your-client-secret-here',
-		'callbackURL' 		: 'http://localhost:8080/auth/twitter/callback'
-	},
-
-	'googleAuth' : {
-		'clientID' 		: 'your-secret-clientID-here',
-		'clientSecret' 	: 'your-client-secret-here',
-		'callbackURL' 	: 'http://128.12.160.33:8888/auth/google/callback'
-	},
-	
 	'cleverAuthReq'	: {
 		'response_type'	: 'code',
 		'redirect_uri'	: CALLBACK_URL,

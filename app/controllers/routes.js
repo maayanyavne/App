@@ -5,25 +5,6 @@ var queryString = require('querystring');
 
 var CleverUser       = require('../models/cleverUser.js');
 
-var onSessionSucess = function(req, res, body)
-{
-	//Authentication was done sucessfully - show main view
-	schedule.showSchedule(req, res, body, onSessionFailure, onScheduleSuccess);
-	
-}
-
-var onSessionFailure = function(req,res, body)
-{
-	//Authentication was done sucessfully - show main view
-	res.render('fail.ejs');
-}
-
-var onScheduleSuccess = function(req,res)
-{
-	//Authentication was done sucessfully - show schedule view
-	console.log('Schedule View');
-	res.render('schedule.ejs');
-}
 
 module.exports = function(app) {
 
@@ -67,3 +48,23 @@ function configureLink() {
 	var link = "\"" + configAuth.cleverAPI.cleverOAuthInit + "?" + authParams + "\" ";	
 	return link;
 }
+var onSessionSucess = function(req, res, body)
+{
+	//Authentication was done sucessfully - show main view
+	schedule.showSchedule(req, res, body, onSessionFailure, onScheduleSuccess);
+	
+}
+
+var onSessionFailure = function(req,res, body)
+{
+	//Authentication was done sucessfully - show main view
+	res.render('fail.ejs');
+}
+
+var onScheduleSuccess = function(req,res)
+{
+	//Authentication was done sucessfully - show schedule view
+	console.log('Schedule View');
+	res.render('schedule.ejs');
+}
+
