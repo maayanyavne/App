@@ -22,7 +22,7 @@ exports.showSchedule = function(req, res, body, onSessionFailure, onScheduleSucc
 	 var options = {
 	 	'url' : "",
 	 	'headers': ""
-	 }
+	 };
 	 options = configureUserRequest(options, access_token);
   	 request( options, function (error, response, body) {
   	 	if (!error && response.statusCode == 200) {
@@ -40,9 +40,11 @@ exports.showSchedule = function(req, res, body, onSessionFailure, onScheduleSucc
        						// update the data model with course data
        						updateCleverUser(body, cleverUser, "courseData");
        						cleverUser.save(function(error) {
-       							if (error)
+       							if (error) {
        								// Failed to log in
+       								console.log('Was not able to save user' + JSON.parse(body));
        								onSessionFailure(req, res, body);	
+       							}
        							else {
        									res.render('schedule.ejs',{courses : cleverUser.courses, id : cleverUser.id});
        								 }
@@ -57,38 +59,44 @@ exports.showSchedule = function(req, res, body, onSessionFailure, onScheduleSucc
 
 // Configure me request to get user id
 function configureUserRequest(options, access_token) {
-	var url = configAuth.cleverAPI.cleverAPIPath + configAuth.cleverAPI.cleverMe;
-	options.url = url;
+	var userUrl = configAuth.cleverAPI.cleverAPIPath + configAuth.cleverAPI.cleverMe;
+	options.url = userUrl;
       
     // Reconfigure header with district oAuth key
-    headers = configAuth.cleverAPIHeaders;
-    headers.Authorization = 'Bearer ' + access_token;
-    options.headers = headers;
+    var userHeaders = {
+	 				'content-type' : configAuth.cleverAPIHeaders.content_type,
+	 				'Authorization': 'Bearer ' + access_token
+	 };
+   
+    options.headers = userHeaders;
 
     return options;
 }
 
 // Configure section request data
 function configureSectionRequest(options, cleverUser){
-	var url = configAuth.cleverAPI.cleverAPIPath;
+	var sectionUrl = configAuth.cleverAPI.cleverAPIPath;
 	
 	// Check to see if teacher or student
 	switch (cleverUser.type){
     case "student": {
-    		url = url + configAuth.cleverStudentAPI.studentAPIPath + cleverUser.id  + configAuth.cleverStudentAPI.studentSections;
+    		sectionUrl = sectionUrl + configAuth.cleverStudentAPI.studentAPIPath + cleverUser.id  + configAuth.cleverStudentAPI.studentSections;
     		break;
    			}
      case "teacher": {
-     		url = url + configAuth.cleverTeacherAPI.teacherAPIPath + cleverUser.id + configAuth.cleverTeacherAPI.teacherSections;
+     		sectionUrl = sectionUrl + configAuth.cleverTeacherAPI.teacherAPIPath + cleverUser.id + configAuth.cleverTeacherAPI.teacherSections;
        		break;									
        		}		
       }
-      options.url = url;
+      options.url = sectionUrl;
       
       // Reconfigure header with district oAuth key
-      headers = configAuth.cleverAPIHeaders;
-      headers.Authorization = 'Bearer ' + configAuth.cleverAuthDev.districtOAuth;
-      options.headers = headers;
+      var sectionHeaders = {
+	 				'content-type' : configAuth.cleverAPIHeaders.content_type,
+	 				'Authorization': 'Bearer ' + configAuth.cleverAuthDev.districtOAuth
+	 };
+     
+      options.headers = sectionHeaders;
       return options;
 }
 

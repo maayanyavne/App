@@ -13,11 +13,14 @@ exports.startOAuth = function(req, res, onSessionSucess, onSessionFailure) {
 		'code': req.param('code'),
  	 	'grant_type': configAuth.cleverAPI.grant_type,
   		'redirect_uri': configAuth.cleverAuthDev.callbackURL
-	}
+	};
 	var authCodeBodyString = queryString.stringify(authCode);
 
 	//Send POST request to get Acess Code
-	var headers = configAuth.cleverAPIHeaders;
+	var headers = {
+	 				'content-type' : configAuth.cleverAPIHeaders.content_type,
+	 				'Authorization': configAuth.cleverAPIHeaders.Authorization
+	 };
 	request.post({
  					 headers: headers,
   					 url:     configAuth.cleverAPI.cleverOAuthToken,
@@ -30,6 +33,7 @@ exports.startOAuth = function(req, res, onSessionSucess, onSessionFailure) {
 											
 					}else
 					{
+						console.log('Failed to recieve code' + body);
 						onSessionFailure(req,res, body);
 
 					}
